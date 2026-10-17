@@ -1,0 +1,535 @@
+{
+  "$defs": {
+    "Compute": {
+      "additionalProperties": false,
+      "properties": {
+        "breakdown": {
+          "items": {
+            "$ref": "#/$defs/ComputeAllocation"
+          },
+          "minItems": 1,
+          "title": "Breakdown",
+          "type": "array"
+        },
+        "total_gpu_hours": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Total Gpu Hours",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "total_gpu_hours",
+        "breakdown"
+      ],
+      "title": "Compute",
+      "type": "object"
+    },
+    "ComputeAllocation": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "enum": [
+            "pretraining",
+            "post_training",
+            "ai_rd_experiments",
+            "safety_research",
+            "external_inference",
+            "internal_inference_ai_rd",
+            "internal_inference_other",
+            "other"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "gpu_hours": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Gpu Hours",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "category",
+        "gpu_hours"
+      ],
+      "title": "ComputeAllocation",
+      "type": "object"
+    },
+    "Developer": {
+      "additionalProperties": false,
+      "properties": {
+        "identifier": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Identifier",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "identifier"
+      ],
+      "title": "Developer",
+      "type": "object"
+    },
+    "Evaluation": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "evaluation_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$",
+          "title": "Evaluation Id",
+          "type": "string"
+        },
+        "method": {
+          "enum": [
+            "automated_eval",
+            "red_team",
+            "production_audit",
+            "human_review",
+            "other"
+          ],
+          "title": "Method",
+          "type": "string"
+        },
+        "model_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$",
+          "title": "Model Id",
+          "type": "string"
+        },
+        "n_trials": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "N Trials",
+          "type": "integer"
+        },
+        "n_violations": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "N Violations",
+          "type": "integer"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        },
+        "severity_breakdown": {
+          "additionalProperties": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "title": "Severity Breakdown",
+          "type": "object"
+        },
+        "spec_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$",
+          "title": "Spec Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "evaluation_id",
+        "model_id",
+        "spec_id",
+        "method",
+        "description",
+        "n_trials",
+        "n_violations"
+      ],
+      "title": "Evaluation",
+      "type": "object"
+    },
+    "EvidenceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "ledger_bundle",
+            "report",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "uri": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "pattern": "^https://[^\\s/]+(/\\S*)?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Uri"
+        }
+      },
+      "required": [
+        "kind",
+        "sha256"
+      ],
+      "title": "EvidenceRef",
+      "type": "object"
+    },
+    "IncidentRef": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "incident_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$",
+          "title": "Incident Id",
+          "type": "string"
+        },
+        "model_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$",
+          "title": "Model Id",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "summary": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "incident_id",
+        "model_id",
+        "severity",
+        "summary"
+      ],
+      "title": "IncidentRef",
+      "type": "object"
+    },
+    "ModelEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "first_external_availability": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "First External Availability"
+        },
+        "first_internal_use": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "title": "First Internal Use",
+          "type": "string"
+        },
+        "model_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$",
+          "title": "Model Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "internal_only",
+            "limited_external",
+            "generally_available",
+            "retired"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "version": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "model_id",
+        "name",
+        "version",
+        "status",
+        "first_internal_use"
+      ],
+      "title": "ModelEntry",
+      "type": "object"
+    },
+    "QualitativeNote": {
+      "additionalProperties": false,
+      "properties": {
+        "note_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$",
+          "title": "Note Id",
+          "type": "string"
+        },
+        "noted_on": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "title": "Noted On",
+          "type": "string"
+        },
+        "text": {
+          "maxLength": 8000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "topic": {
+          "enum": [
+            "ai_rd_automation",
+            "autonomy",
+            "oversight",
+            "surprises",
+            "safety",
+            "other"
+          ],
+          "title": "Topic",
+          "type": "string"
+        }
+      },
+      "required": [
+        "note_id",
+        "noted_on",
+        "topic",
+        "text"
+      ],
+      "title": "QualitativeNote",
+      "type": "object"
+    },
+    "ReportingPeriod": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "title": "End",
+          "type": "string"
+        },
+        "start": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "title": "Start",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "title": "ReportingPeriod",
+      "type": "object"
+    },
+    "SpecDocument": {
+      "additionalProperties": false,
+      "properties": {
+        "applies_to": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Applies To",
+          "type": "array"
+        },
+        "effective_date": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "title": "Effective Date",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "spec_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$",
+          "title": "Spec Id",
+          "type": "string"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Summary"
+        },
+        "title": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "pattern": "^https://[^\\s/]+(/\\S*)?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        },
+        "version": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "spec_id",
+        "title",
+        "version",
+        "applies_to",
+        "effective_date",
+        "sha256"
+      ],
+      "title": "SpecDocument",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "compute": {
+      "$ref": "#/$defs/Compute"
+    },
+    "developer": {
+      "$ref": "#/$defs/Developer"
+    },
+    "evaluations": {
+      "items": {
+        "$ref": "#/$defs/Evaluation"
+      },
+      "title": "Evaluations",
+      "type": "array"
+    },
+    "incidents": {
+      "items": {
+        "$ref": "#/$defs/IncidentRef"
+      },
+      "title": "Incidents",
+      "type": "array"
+    },
+    "models": {
+      "items": {
+        "$ref": "#/$defs/ModelEntry"
+      },
+      "minItems": 1,
+      "title": "Models",
+      "type": "array"
+    },
+    "period": {
+      "$ref": "#/$defs/ReportingPeriod"
+    },
+    "published_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$",
+      "title": "Published At",
+      "type": "string"
+    },
+    "qualitative_notes": {
+      "items": {
+        "$ref": "#/$defs/QualitativeNote"
+      },
+      "title": "Qualitative Notes",
+      "type": "array"
+    },
+    "report_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "trs/1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "specs": {
+      "items": {
+        "$ref": "#/$defs/SpecDocument"
+      },
+      "minItems": 1,
+      "title": "Specs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "report_id",
+    "developer",
+    "period",
+    "published_at",
+    "models",
+    "specs",
+    "compute"
+  ],
+  "title": "TransparencyReport",
+  "type": "object"
+}

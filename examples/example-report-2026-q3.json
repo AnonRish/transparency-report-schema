@@ -1,0 +1,140 @@
+{
+  "compute": {
+    "breakdown": [
+      {
+        "category": "pretraining",
+        "gpu_hours": 20000000
+      },
+      {
+        "category": "post_training",
+        "gpu_hours": 6000000
+      },
+      {
+        "category": "ai_rd_experiments",
+        "gpu_hours": 14000000
+      },
+      {
+        "category": "safety_research",
+        "gpu_hours": 4000000
+      },
+      {
+        "category": "external_inference",
+        "gpu_hours": 24000000
+      },
+      {
+        "category": "internal_inference_ai_rd",
+        "gpu_hours": 8000000
+      },
+      {
+        "category": "internal_inference_other",
+        "gpu_hours": 2000000
+      },
+      {
+        "category": "other",
+        "gpu_hours": 2000000
+      }
+    ],
+    "total_gpu_hours": 80000000
+  },
+  "developer": {
+    "identifier": "exampleai.invalid",
+    "name": "ExampleAI Labs (FICTIONAL)"
+  },
+  "evaluations": [
+    {
+      "description": "Held-out instruction-following suite.",
+      "evaluation_id": "eval-instr-1",
+      "method": "automated_eval",
+      "model_id": "alpha-2",
+      "n_trials": 12000,
+      "n_violations": 36,
+      "severity_breakdown": {
+        "low": 30,
+        "medium": 6
+      },
+      "spec_id": "alpha-spec"
+    },
+    {
+      "description": "Internal red-team of the preview model against the spec.",
+      "evaluation_id": "eval-redteam-1",
+      "method": "red_team",
+      "model_id": "alpha-3-preview",
+      "n_trials": 800,
+      "n_violations": 12,
+      "notes": "High-severity cases were reviewed individually.",
+      "severity_breakdown": {
+        "high": 4,
+        "medium": 8
+      },
+      "spec_id": "alpha-spec"
+    }
+  ],
+  "incidents": [
+    {
+      "evidence": [
+        {
+          "kind": "ledger_bundle",
+          "sha256": "d980f7a19d2c1b56e7c9137dda6c2f4cf898149f5af8ce1730454266e194b66b",
+          "uri": "https://exampleai.invalid/incidents/INC-2026-07"
+        }
+      ],
+      "incident_id": "INC-2026-07",
+      "model_id": "alpha-3-preview",
+      "severity": "medium",
+      "summary": "The preview model skipped a required logging step in an internal job."
+    }
+  ],
+  "models": [
+    {
+      "first_external_availability": "2026-04-20",
+      "first_internal_use": "2026-02-10",
+      "model_id": "alpha-2",
+      "name": "Alpha",
+      "status": "generally_available",
+      "version": "2.0"
+    },
+    {
+      "first_internal_use": "2026-08-05",
+      "model_id": "alpha-3-preview",
+      "name": "Alpha",
+      "status": "internal_only",
+      "version": "3.0-preview"
+    }
+  ],
+  "period": {
+    "end": "2026-09-30",
+    "start": "2026-07-01"
+  },
+  "published_at": "2026-10-15T09:00:00Z",
+  "qualitative_notes": [
+    {
+      "note_id": "note-1",
+      "noted_on": "2026-08-20",
+      "text": "Internal agents now draft and launch most routine ablation experiments; researchers mostly review results rather than write the code.",
+      "topic": "ai_rd_automation"
+    },
+    {
+      "note_id": "note-2",
+      "noted_on": "2026-09-12",
+      "text": "Human review of agent actions is concentrated on the small share of actions that touch production credentials.",
+      "topic": "oversight"
+    }
+  ],
+  "report_id": "exampleai-2026-q3",
+  "schema_version": "trs/1",
+  "specs": [
+    {
+      "applies_to": [
+        "alpha-2",
+        "alpha-3-preview"
+      ],
+      "effective_date": "2026-06-15",
+      "sha256": "bbc97b7978b9a88b80c8a6580b0b8d01e21be3fec046dc5f490027452767456e",
+      "spec_id": "alpha-spec",
+      "summary": "Goals, values and priorities the Alpha models are trained to follow.",
+      "title": "Alpha model specification",
+      "url": "https://exampleai.invalid/specs/alpha-v4",
+      "version": "4"
+    }
+  ]
+}

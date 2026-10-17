@@ -1,0 +1,8 @@
+{
+  "max_ai_rd_share_bps": 5000,
+  "max_internal_deployment_share_bps": 1500,
+  "max_internal_external_gap_days": 60,
+  "max_violation_rate_bps": 100,
+  "min_trials_per_evaluation": 1000,
+  "require_adherence_evaluation_per_model": true
+}

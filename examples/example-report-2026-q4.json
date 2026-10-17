@@ -1,0 +1,115 @@
+{
+  "compute": {
+    "breakdown": [
+      {
+        "category": "pretraining",
+        "gpu_hours": 22000000
+      },
+      {
+        "category": "post_training",
+        "gpu_hours": 9000000
+      },
+      {
+        "category": "ai_rd_experiments",
+        "gpu_hours": 17000000
+      },
+      {
+        "category": "safety_research",
+        "gpu_hours": 5000000
+      },
+      {
+        "category": "external_inference",
+        "gpu_hours": 25000000
+      },
+      {
+        "category": "internal_inference_ai_rd",
+        "gpu_hours": 15000000
+      },
+      {
+        "category": "internal_inference_other",
+        "gpu_hours": 5000000
+      },
+      {
+        "category": "other",
+        "gpu_hours": 2000000
+      }
+    ],
+    "total_gpu_hours": 100000000
+  },
+  "developer": {
+    "identifier": "exampleai.invalid",
+    "name": "ExampleAI Labs (FICTIONAL)"
+  },
+  "evaluations": [
+    {
+      "description": "Held-out instruction-following suite.",
+      "evaluation_id": "eval-instr-1",
+      "method": "automated_eval",
+      "model_id": "alpha-2",
+      "n_trials": 12000,
+      "n_violations": 60,
+      "severity_breakdown": {
+        "low": 48,
+        "medium": 12
+      },
+      "spec_id": "alpha-spec"
+    }
+  ],
+  "incidents": [],
+  "models": [
+    {
+      "first_external_availability": "2026-04-20",
+      "first_internal_use": "2026-02-10",
+      "model_id": "alpha-2",
+      "name": "Alpha",
+      "status": "generally_available",
+      "version": "2.0"
+    },
+    {
+      "first_external_availability": "2026-11-10",
+      "first_internal_use": "2026-08-05",
+      "model_id": "alpha-3-preview",
+      "name": "Alpha",
+      "status": "limited_external",
+      "version": "3.0-preview"
+    },
+    {
+      "first_internal_use": "2026-12-01",
+      "model_id": "beta-1",
+      "name": "Beta",
+      "status": "internal_only",
+      "version": "1.0"
+    }
+  ],
+  "period": {
+    "end": "2026-12-31",
+    "start": "2026-10-01"
+  },
+  "published_at": "2027-01-15T09:00:00Z",
+  "qualitative_notes": [
+    {
+      "note_id": "note-3",
+      "noted_on": "2026-11-18",
+      "text": "Internal agents now propose and run follow-up experiments without a human choosing the next step in most routine cases.",
+      "topic": "ai_rd_automation"
+    }
+  ],
+  "report_id": "exampleai-2026-q4",
+  "schema_version": "trs/1",
+  "specs": [
+    {
+      "applies_to": [
+        "alpha-2",
+        "alpha-3-preview",
+        "beta-1"
+      ],
+      "effective_date": "2026-11-01",
+      "sha256": "33682aa9b37cdec8e2b363070681c15c670aba953881009f7b0ec6a31e473e6f",
+      "spec_id": "alpha-spec",
+      "summary": "Goals, values and priorities the Alpha models are trained to follow.",
+      "title": "Alpha model specification",
+      "url": "https://exampleai.invalid/specs/alpha-v4",
+      "version": "5"
+    }
+  ]
+}
